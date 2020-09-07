@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% import "bootstrap/utils.html" as utils %}
+
+{% block app_content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Thanks for Requesting Access!</h1>
+        <p class="lead">You will receive an email at <strong>{{ email }}</strong> with your API token.  
+            Use this API token in every request made to soc-faker's API.</p>
+        <p>
+        <hr class="my-4">
+        <p>Use this token in every request made to our API.  You must add a header key of <strong>soc-faker</strong> and the value is your <strong>API Token</strong>
+            Please see the examples below.
+        </p>
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <center>
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Python Example
+                        </button>
+                        </center>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <pre style="text-align: left; white-space: pre-line;">
+                            <code>
+import requests
+
+headers = {'soc-faker': 'LiveInopportuneStumpClunkyWickedlyEnemy'}
+
+response = requests.get('{{request.host_url}}/api/agent', headers=headers).json()
+
+print(response)
+                            </code> 
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <center>
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        PowerShell Example
+                        </button>
+                        </center>
+                    </h5>
+                </div>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <pre style="text-align: left; white-space: pre-line;">
+                        <code>
+$request = @{
+    Method = 'Get'
+    Uri = '{{request.host_url}}/api/agent'
+    Headers = @{'soc-faker' = 'LiveInopportuneStumpClunkyWickedlyEnemy'}
+}
+
+Invoke-RestMethod @request
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

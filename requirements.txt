@@ -1,0 +1,13 @@
+pyyaml
+fire
+Flask==1.1.2
+Flask-API
+flask-wtf
+mongoengine
+soc-faker==2.1.0
+pendulum==1.2.5
+email_validator
+Flask-Session
+flask-mail
+flask-bootstrap
+flask-nav

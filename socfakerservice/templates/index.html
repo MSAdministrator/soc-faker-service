@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/utils.html" as utils %}
+
+{% block app_content %}
+  <div class="jumbotron">
+    <h1>Welcome to soc-faker</h1>
+    <p>soc-faker is a service which allows you to generate fake data related to information security data points and products.</p>
+    <p>soc-faker is based on and uses the Python package <strong>soc-faker</strong>.  See documentation for this Python package below.</p>
+    <p>
+      <a class="btn btn-lg btn-default" role="button"
+           href="https://soc-faker.readthedocs.io/en/latest/" >Show docs</a>
+    </p>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="thumbnail">
+        <center>
+          <span class="glyphicon glyphicon-search" style="font-size:50px;"></span>
+          <div class="caption">
+            <h1 class="display-3">Search Around</h1>
+          </div>
+          <p>By using the Endpoints dropdown menu you can select some fake data attribute and copy / paste to whatever application you want.</p>
+        </center>
+        </div>
+    </div>
+    <div class="col-md-6">
+      <div class="thumbnail">
+        <center>
+          <span class="glyphicon glyphicon-send" style="font-size:50px;"></span>
+          <div class="caption">
+            <h1 class="display-3">Use Our API</h1>
+          </div>
+          <p>You can request a API token via email by <a href="{{ url_for('token') }}">requesting a token</a>.  Once you have a token then you can use soc-faker via our RESTful API!</p>
+        </center>
+          <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <center>
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Python Example
+                  </button>
+                  </center>
+                </h5>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  <pre style="text-align: left; white-space: pre-line;">
+                    <code>
+import requests
+
+headers = {'soc-faker': 'LiveInopportuneStumpClunkyWickedlyEnemy'}
+
+response = requests.get('{{request.host_url}}/api/agent', headers=headers).json()
+
+print(response)
+                    </code> 
+                  </pre>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <center>
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    PowerShell Example
+                  </button>
+                </center>
+                </h5>
+              </div>
+            </center>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  <pre style="text-align: left; white-space: pre-line;">
+                    <code>
+$request = @{
+    Method = 'Get'
+    Uri = '{{request.host_url}}/api/agent'
+    Headers = @{'soc-faker' = 'LiveInopportuneStumpClunkyWickedlyEnemy'}
+}
+
+Invoke-RestMethod @request
+                    </code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
