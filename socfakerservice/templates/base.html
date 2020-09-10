@@ -117,15 +117,73 @@
 {% if request.endpoint not in ['index','token','thanks'] %}
 <div class="content-main">
     <div class="page-header"><h1>{{ view_name }}</h1></div>
-    {% if view_description %}<div style="margin-top: -10px; margin-bottom: 10px">{{ view_description|safe }}</div>{% endif %}
+    {% if view_description %}
+    <div style="margin-top: -10px; margin-bottom: 10px">{{ view_description|safe }}</div>{% endif %}
     <div class="request-info" style="clear: both" >
-        <pre class="prettyprint"><b>{{ request.method }}</b> {{ request.url }}</pre>
+        <pre class="prettyprint"><b>{{ request.method }}</b> {{ request.url | replace("http://","https://") }}</pre>
     </div>
     <div class="response-info">
-        <pre class="prettyprint"><div class="meta nocode"><b>HTTP {{ status }}</b>{% autoescape off %}
-
-</div>{% if content %}{{ content|urlize_quoted_links }}{% endif %}<!-- |urlize_quoted_links --></pre>{% endautoescape %}
+        <pre class="prettyprint">
+            <div class="meta nocode"><b>HTTP {{ status }}</b>{% autoescape off %}</div>
+            {% if content %}{{ content|urlize_quoted_links }}{% endif %}<!-- |urlize_quoted_links --></pre>{% endautoescape %}
     </div>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <center>
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Python Example
+              </button>
+              </center>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <pre style="text-align: left; white-space: pre-line;">
+                <code>
+import requests
+
+headers = {'soc-faker': 'LiveInopportuneStumpClunkyWickedlyEnemy'}
+
+response = requests.get('{{request.host_url | replace("http://","https://") }}api{{request.path}}', headers=headers).json()
+
+print(response)
+                </code> 
+              </pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <center>
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                PowerShell Example
+              </button>
+            </center>
+            </h5>
+          </div>
+        </center>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+              <pre style="text-align: left; white-space: pre-line;">
+                <code>
+$request = @{
+Method = 'Get'
+Uri = '{{request.host_url | replace("http://","https://") }}api{{request.path}}'
+Headers = @{'soc-faker' = 'LiveInopportuneStumpClunkyWickedlyEnemy'}
+}
+
+Invoke-RestMethod @request
+                </code>
+              </pre>
+            </div>
+          </div>
+        </div>
+        
+      </div>
 </div>
 
 

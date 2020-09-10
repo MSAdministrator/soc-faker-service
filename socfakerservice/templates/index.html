@@ -52,7 +52,7 @@ import requests
 
 headers = {'soc-faker': 'LiveInopportuneStumpClunkyWickedlyEnemy'}
 
-response = requests.get('{{request.host_url}}/api/agent', headers=headers).json()
+response = requests.get('{{request.host_url | replace("http://","https://") }}api/agent', headers=headers).json()
 
 print(response)
                     </code> 
@@ -78,7 +78,7 @@ print(response)
                     <code>
 $request = @{
     Method = 'Get'
-    Uri = '{{request.host_url}}/api/agent'
+    Uri = '{{request.host_url | replace("http://","https://") }}api/agent'
     Headers = @{'soc-faker' = 'LiveInopportuneStumpClunkyWickedlyEnemy'}
 }
 
