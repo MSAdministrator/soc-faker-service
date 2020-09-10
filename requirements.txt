@@ -11,3 +11,4 @@ Flask-Session
 flask-mail
 flask-bootstrap
 flask-nav
+gunicorn

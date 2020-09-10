@@ -24,4 +24,12 @@ WORKDIR /app
 RUN export PYTHONPATH=/app:$PYTHONPATH
 RUN python setup.py install
 
-CMD [ "python", "/app/run.py" ]
+#CMD [ "python", "/app/run.py" ]
+CMD ["gunicorn", \
+     "--threads", "3", \
+     "--access-logfile", "-", \
+     "--error-logfile", "-", \
+     "--timeout", "600", \
+     "--bind", "0.0.0.0:5000", \
+     "--graceful-timeout", "500", \
+     "socfakerservice:app"]

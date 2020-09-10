@@ -13,14 +13,14 @@ services:
       - URL=soc-faker.com
       - VALIDATION=http
       - EMAIL= socfakerservice@gmail.com
-      - STAGING=true #optional
+      - STAGING=false #optional
     volumes:
       - ./data/nginx/site-confs/default:/config/nginx/site-confs/default
     ports:
       - 443:443
       - 80:80 #optional
     restart: unless-stopped
-    
+
   tokenizer:
     image: mongo
     restart: always
@@ -30,8 +30,8 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     command: mongod --bind_ip_all
-    ports:
-      - "27017:27017"
+    expose:
+      - 27017
 
   soc-faker-service:
     build:
@@ -49,5 +49,5 @@ services:
       MAIL_USE_TLS: "True"
       MAIL_USERNAME: socfakerservice@gmail.com
       MAIL_PASSWORD: super_secret_password
-    ports:
-      - "7001:7001"
+    expose: 
+      - 5000
